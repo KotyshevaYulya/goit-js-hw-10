@@ -48,13 +48,13 @@ startBtn.addEventListener('click', () => {
     input.setAttribute('disabled', '');
     const intervalId = setInterval(() => {
         const carrentTime = Date.now();
-        milliseconds = userSelectedDate.getTime() - carrentTime;
-        
+         milliseconds = userSelectedDate.getTime() - carrentTime;
+        console.log(convertMs(milliseconds));
+
         timerValue[0].textContent = days.toString().padStart(2, '0');
         timerValue[1].textContent = hours.toString().padStart(2, '0');
         timerValue[2].textContent = minutes.toString().padStart(2, '0');
         timerValue[3].textContent = seconds.toString().padStart(2, '0');
-
         if (milliseconds < 1000) {
             startBtn.removeAttribute('disabled', '');
             clearInterval(intervalId);
