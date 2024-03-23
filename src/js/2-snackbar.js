@@ -10,7 +10,7 @@ let milliseconds;
 let radioValue;
 
 input.addEventListener('input', (event) => {
-    milliseconds = event.currentTarget.value;
+    milliseconds = Number(event.currentTarget.value);
 });
 
 submit.addEventListener('submit', handleSubmit);
@@ -26,7 +26,6 @@ function handleSubmit(event) {
 
     const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log(milliseconds, radioValue);
             if (radioValue === 'fulfilled') {
                 resolve(milliseconds);
             } else {
@@ -39,14 +38,14 @@ function handleSubmit(event) {
   promise
     .then(value => {
       iziToast.success({
-        color: 'green',
+        backgroundColor: 'green',
         position: 'topRight',
         message: `✅ Fulfilled promise in ${milliseconds}ms`,
       });
     })
     .catch(error => {
       iziToast.error({
-        color: 'red',
+        backgroundColor: 'red',
         position: 'topRight',
         message: `❌ Rejected promise in ${milliseconds}ms`,
       });

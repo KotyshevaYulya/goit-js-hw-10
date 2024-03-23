@@ -6,11 +6,6 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 
 let userSelectedDate;
-let milliseconds;
-let days;
-let hours;
-let minutes;
-let seconds;
 
 const input = document.querySelector('#datetime-picker');
 const timerValue = document.querySelectorAll(".value");
@@ -35,7 +30,7 @@ const options = {
         message: `Please choose a date in the future`,
       });
         } else {
-            startBtn.removeAttribute('disabled', '');
+            startBtn.removeAttribute('disabled');
 
         }
   },
@@ -48,15 +43,15 @@ startBtn.addEventListener('click', () => {
     input.setAttribute('disabled', '');
     const intervalId = setInterval(() => {
         const carrentTime = Date.now();
-         milliseconds = userSelectedDate.getTime() - carrentTime;
-        console.log(convertMs(milliseconds));
+        const milliseconds = userSelectedDate.getTime() - carrentTime;
+      const timer = convertMs(milliseconds);
 
-        timerValue[0].textContent = days.toString().padStart(2, '0');
-        timerValue[1].textContent = hours.toString().padStart(2, '0');
-        timerValue[2].textContent = minutes.toString().padStart(2, '0');
-        timerValue[3].textContent = seconds.toString().padStart(2, '0');
+        timerValue[0].textContent = timer.days.toString().padStart(2, '0');
+        timerValue[1].textContent = timer.hours.toString().padStart(2, '0');
+        timerValue[2].textContent = timer.minutes.toString().padStart(2, '0');
+        timerValue[3].textContent = timer.seconds.toString().padStart(2, '0');
         if (milliseconds < 1000) {
-            startBtn.removeAttribute('disabled', '');
+            startBtn.removeAttribute('disabled', "true");
             clearInterval(intervalId);
         };
   }, 1000);
@@ -72,13 +67,13 @@ function convertMs(ms) {
   const day = hour * 24;
 
   // Remaining days
-  days = Math.floor(ms / day);
+ const days = Math.floor(ms / day);
   // Remaining hours
-  hours = Math.floor((ms % day) / hour);
+ const hours = Math.floor((ms % day) / hour);
   // Remaining minutes
-  minutes = Math.floor(((ms % day) % hour) / minute);
+  const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
-  seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
     
   return { days, hours, minutes, seconds };
